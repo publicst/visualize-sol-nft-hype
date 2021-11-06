@@ -1,0 +1,24 @@
+{
+  "name": "visualize-sol-nft-hype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/publicst/visualize-sol-nft-hype.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/publicst/visualize-sol-nft-hype/issues"
+  },
+  "homepage": "https://github.com/publicst/visualize-sol-nft-hype#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10"
+  }
+}

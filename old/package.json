@@ -1,0 +1,23 @@
+{
+  "name": "visualize-sol-nft-hype",
+  "version": "1.0.0",
+  "description": "Visualize Solana NFT Hype",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/publicst/visualize-sol-nft-hype.git"
+  },
+  "author": "publicst",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/publicst/visualize-sol-nft-hype/issues"
+  },
+  "homepage": "https://github.com/publicst/visualize-sol-nft-hype#readme",
+  "devDependencies": {
+    "jsdom": "^18.0.1",
+    "node-fetch": "^3.0.0"
+  }
+}
