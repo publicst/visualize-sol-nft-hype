@@ -80,12 +80,32 @@ async function scrapeMarketCap () {
   // ((((；ﾟДﾟ)))) did not work because there are multiple elements
 
   // so search for the element by cssSelector https://stackoverflow.com/questions/21713280/find-div-element-by-multiple-class-names
-  elem = await driver.findElement(By.css('div.flex.items-baseline'));
-  marketCap = await elem.getText();
-  console.log(marketCap);
+  elems = await driver.findElements(By.css('div.flex.items-baseline'));
+  console.log('count of elements : ' + elems.length);
+  
+  // ((((；ﾟДﾟ)))) somehow forEach async is throwing ECONNREFUSED (which was caused because await was not called properly)
+  // elems.forEach(async (elem)=>{
+  //   text = await elem.getText();
+  //   console.log(text);
+  // })
+  // ((((；ﾟДﾟ))))
 
-  // problem 1 : child span gets loaded in the WebElement
-  // problem 2 : findElements has to be used because 7 Day Volume also uses EXACT SAME CSS selector... why...
+  for (i = 0; i < elems.length; i++) {
+    text = await elems[i].getText();
+    text = text.substring(0, text.indexOf('\n')); // remove anything after new line since that is previous day's info
+    num = Number(text.replace(/[^0-9.-]+/g,""));
+    if (i == 0) {         // first one should be market cap
+      marketCap = num;
+    } else if (i == 1) {  // second one should be 7 days volume
+      sevenDaysVolume = num;
+    }
+  }
+
+  console.log(marketCap);
+  console.log(sevenDaysVolume);
+
+  // problem 1 : fixed : child span gets loaded in the WebElement
+  // problem 2 : fixed : findElements has to be used because 7 Day Volume also uses EXACT SAME CSS selector... why...
 
   driver.quit();
 }
