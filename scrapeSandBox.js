@@ -75,21 +75,19 @@ async function scrapeMarketCap () {
 
   await new Promise(resolve => setTimeout(resolve, 5000)); 
 
-  // search for the element by class 
-  // elem = await driver.findElements(By.className('flex').className('items-baseline'));
-  // ((((；ﾟДﾟ)))) did not work because there are multiple elements
-
   // so search for the element by cssSelector https://stackoverflow.com/questions/21713280/find-div-element-by-multiple-class-names
   elems = await driver.findElements(By.css('div.flex.items-baseline'));
-  console.log('count of elements : ' + elems.length);
   
   // ((((；ﾟДﾟ)))) somehow forEach async is throwing ECONNREFUSED (which was caused because await was not called properly)
   // elems.forEach(async (elem)=>{
   //   text = await elem.getText();
   //   console.log(text);
   // })
-  // ((((；ﾟДﾟ))))
+  // ((((；ﾟДﾟ)))) https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
 
+  // decided not to use 
+  // for (const elem of elems) 
+  // because I need to only get first 2 out of 3
   for (i = 0; i < elems.length; i++) {
     text = await elems[i].getText();
     text = text.substring(0, text.indexOf('\n')); // remove anything after new line since that is previous day's info
@@ -103,9 +101,6 @@ async function scrapeMarketCap () {
 
   console.log(marketCap);
   console.log(sevenDaysVolume);
-
-  // problem 1 : fixed : child span gets loaded in the WebElement
-  // problem 2 : fixed : findElements has to be used because 7 Day Volume also uses EXACT SAME CSS selector... why...
 
   driver.quit();
 }
